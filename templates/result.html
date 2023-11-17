@@ -2,23 +2,34 @@
 <html>
 <head>
     <title>Result Page</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* 추가된 스타일: 페이징 중앙 정렬 */
+        .pagination {
+            justify-content: center;
+        }
+    </style>
+    <!-- 부트스트랩 CSS 링크 추가 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 부트스트랩의 JavaScript 및 Popper.js 스크립트 추가 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
 </head>
-<style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-</style>
 <body>
     <h1>Data from Database</h1>
 
@@ -57,5 +68,43 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <!-- Bootstrap의 페이징 컴포넌트 추가 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if kafka_db_data.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ kafka_db_data.previous_page_number }}{% if current_item_filter %}&item_filter={{ current_item_filter }}{% endif %}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">이전</span>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in kafka_db_data.paginator.page_range %}
+        {% if page_number >= kafka_db_data.number|add:-5 and page_number <= kafka_db_data.number|add:5 %}
+        {% if page_number == kafka_db_data.number %}
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">{{ page_number }}</span>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_number }}{% if current_item_filter %}&item_filter={{ current_item_filter }}{% endif %}">{{ page_number }}</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if kafka_db_data.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ kafka_db_data.next_page_number }}{% if current_item_filter %}&item_filter={{ current_item_filter }}{% endif %}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">다음</span>
+        </li>
+        {% endif %}
+    </ul>
 </body>
 </html>
