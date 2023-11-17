@@ -12,8 +12,8 @@ RUN apk update && apk add --no-cache \
     gcc musl-dev mariadb-connector-c-dev mariadb-dev \
     && pip install --upgrade pip \
     && pip install -r requirements.txt --no-cache-dir \
-    && apk del --rdepends --purge musl-dev gcc
+    && apk del --rdepends --purge musl-dev gcc \
+    && chmod +x /app/cmd.sh
 
 # 컨테이너 실행 시 자동으로 실행될 명령어 설정
-ENTRYPOINT ["python3"]
-CMD ["manage.py", "runserver", "0.0.0.0:8080"]
+USER 1001
