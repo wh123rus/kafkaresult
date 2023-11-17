@@ -8,7 +8,7 @@ class Menu(models.Model):
     name = models.CharField(max_length=255)
     item = models.CharField(max_length=255)
     number = models.IntegerField()
-    uuid = models.CharField(max_length=255, unique=True)
+    uuid = models.CharField(max_length=255, unique=True, primary_key = True)
 
     def __str__(self):
         return self.uuid  # 모델을 출력할 때 보여질 필드 선택
