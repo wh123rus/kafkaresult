@@ -81,8 +81,8 @@ DATABASES = {
         "NAME": os.getenv('DB_NAME','shop'),
         "USER": os.getenv('DB_USER','root'),
         "PASSWORD": os.getenv('DB_PASSWORD','root'),
-        "HOST": os.getenv('DB_HOST','10.187.116.46'),
-        "PORT": "3306",
+        "HOST": os.getenv('DB_HOST','localhost'),
+        "PORT": os.getenv('DB_PORT','3306'),
     }
 }
 
