@@ -14,4 +14,4 @@ class Menu(models.Model):
         return self.uuid  # 모델을 출력할 때 보여질 필드 선택
     class Meta:
         # 기존 테이블 이름 지정
-        db_table = os.getenv('DB_TABLE', 'testmenu')
+        db_table = os.getenv('DB_TABLE', 'menu')

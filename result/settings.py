@@ -75,10 +75,10 @@ WSGI_APPLICATION = 'result.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-db_name = os.getenv('DB_NAME','shop')
-db_user = os.getenv('DB_USER','root')
-db_pwd = os.getenv('DB_PASSWORD','root')
-db_host = os.getenv('MARIADB_GALERA_SERVICE_HOST','localhost')
+db_name = os.getenv('DB_NAME','test')
+db_user = os.getenv('DB_USER','user')
+db_pwd = os.getenv('DB_PASSWORD','user')
+db_host = os.getenv('MARIADB_GALERA_SERVICE_HOST','192.168.56.200')
 db_port = os.getenv('MARIADB_GALERA_SERVICE_PORT','3306')
 
 
