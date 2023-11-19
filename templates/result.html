@@ -71,10 +71,14 @@
 
     <!-- Bootstrap의 페이징 컴포넌트 추가 -->
     <ul class="pagination justify-content-center">
+        <!-- 처음으로 가는 버튼 -->
+        <li class="page-item {% if kafka_db_data.number == 1 %}disabled{% endif %}">
+            <a class="page-link" href="?page=1{% if current_item_filter %}&item_filter={{ current_item_filter }}{% endif %}"><<</a>
+        </li>
         <!-- 이전페이지 -->
         {% if kafka_db_data.has_previous %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ kafka_db_data.previous_page_number }}{% if current_item_filter %}&item_filter={{ current_item_filter }}{% endif %}">이전</a>
+            <a class="page-link" href="?page={{ kafka_db_data.previous_page_number }}{% if current_item_filter %}&item_filter={{ current_item_filter }}{% endif %}"><</a>
         </li>
         {% else %}
         <li class="page-item disabled">
@@ -98,13 +102,17 @@
         <!-- 다음페이지 -->
         {% if kafka_db_data.has_next %}
         <li class="page-item">
-            <a class="page-link" href="?page={{ kafka_db_data.next_page_number }}{% if current_item_filter %}&item_filter={{ current_item_filter }}{% endif %}">다음</a>
+            <a class="page-link" href="?page={{ kafka_db_data.next_page_number }}{% if current_item_filter %}&item_filter={{ current_item_filter }}{% endif %}">></a>
         </li>
         {% else %}
         <li class="page-item disabled">
             <span class="page-link">다음</span>
         </li>
         {% endif %}
+        <!-- 마지막으로 가는 버튼 -->
+        <li class="page-item {% if kafka_db_data.number == kafka_db_data.paginator.num_pages %}disabled{% endif %}">
+            <a class="page-link" href="?page={{ kafka_db_data.paginator.num_pages }}{% if current_item_filter %}&item_filter={{ current_item_filter }}{% endif %}">>></a>
+        </li>
     </ul>
 </body>
 </html>
